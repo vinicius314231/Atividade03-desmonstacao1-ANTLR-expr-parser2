@@ -1,0 +1,63 @@
+<? xml version = "1.0" encoding = "UTF-8"?>
+<project xmlns = "http://maven.apache.org/POM/4.0.0" xmlns: xsi = "http://www.w3.org/2001/XMLSchema-instance" xsi: schemaLocation = "http: / /maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd ">
+    <modelVersion> 4.0.0 </modelVersion>
+    <groupId> br.ufscar.dc.compiladores </groupId>
+    <artifactId> expr-parser2 </artifactId>
+    <version> 1.0-SNAPSHOT </version>
+    <packaging> jar </packaging>
+    <propriedades>
+        <project.build.sourceEncoding> UTF-8 </project.build.sourceEncoding>
+        <maven.compiler.source> 11 </maven.compiler.source>
+        <maven.compiler.target> 11 </maven.compiler.target>
+    </properties>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId> org.antlr </groupId>
+                <artifactId> antlr4-maven-plugin </artifactId>
+                <version> 4.7.2 </version>
++                 <configuration> 
++                     <visitor> true </visitor> 
++                 </configuration>
+                <execuções>
+                    <execução>
+                        <id> antlr </id>
+                        <metas>
+                            <goal> antlr4 </goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>            
+            <plugin>
+                <artifactId> maven-assembly-plugin </artifactId>
+                <configuração>
+                    <arquivo>
+                        <manifest>
+<mainClass> br.ufscar.dc.compiladores.expr.parser2.Principal </mainClass>
+                        </manifest>
+                    </archive>
+                    <descriptorRefs>
+                        <descriptorRef> jar-with-dependencies </descriptorRef>
+                    </descriptorRefs>
+                </configuration>
+                <execuções>
+                    <execução>
+                        <id> montagem de fabricação </id>
+                        <phase> pacote </phase>
+                        <metas>
+                            <goal> único </goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+    <dependências>
+        <dependência>
+            <groupId> org.antlr </groupId>
+            <artifactId> antlr4 </artifactId>
+            <version> 4.7.2 </version>
+            <classifier> completo </classifier>
+        </dependency>
+    </dependencies>     
+</project>
