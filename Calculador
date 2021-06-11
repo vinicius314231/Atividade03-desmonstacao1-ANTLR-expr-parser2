@@ -1,0 +1,53 @@
+package  br.ufscar.dc.compiladores.expr.parser2 ;
+
+import  br.ufscar.dc.compiladores.expr.parser2.ExpressoesParser.FatorContext ;
+import  br.ufscar.dc.compiladores.expr.parser2.ExpressoesParser.TermoContext ;
+
+public  class  Calculador  extends  ExpressoesBaseVisitor < Double > {
+
+    @Override 
+    pública  Duplo  visitPrograma ( ExpressoesParser . ProgramaContext  ctx ) {
+         retornar visitExpressao (ctx . Expressao ());
+    }
+
+    @Override 
+    public  Double  visitExpressao ( ExpressoesParser . ExpressaoContext  ctx ) {
+         double valor = visitTermo (ctx . Termo1);
+        for ( int i =  0 ; i < ctx . outrosTermos . size (); i ++ ) {
+             ExpressoesParser . Op1Context op1 = ctx . op1 (i);
+            TermoContext ot = ctx .outrosTermos . Entendi);
+            String strOp1 = op1 . getText ();
+            if (strOp1 . equals ( " + " )) {
+                valor + = visitaTermo (ot);
+            } else {
+                valor - = visitaTermo (ot);
+            }
+        }
+        valor de retorno ;
+    }
+
+    @Override 
+    pública  Duplo  visitTermo ( ExpressoesParser . TermoContext  ctx ) {
+         double valor = visitFator (ctx . Fator1);
+        for ( int i =  0 ; i < ctx . outrosFatores . size (); i ++ ) {
+             ExpressoesParser . Op2Context op2 = ctx . op2 (i);
+            FatorContext de = ctx .outrosFatores . Entendi);
+            String strOp2 = op2 . getText ();
+            if (strOp2 . equals ( " * " )) {
+                valor * = visitFator (de);
+            } else {
+                valor / = visitFator (de);
+            }
+        }
+        valor de retorno ;
+    }
+
+    @Substituir 
+    public  Double  visitFator ( ExpressoesParser . FatorContext  ctx ) {
+         if ( ctx . NUM () ! =  Null ) {
+             return  Double . parseDouble ( ctx . NUM () . getText ());
+        } else {
+             retornar visitExpressao (ctx . expressao ());
+        }
+    }
+}
